@@ -4,3 +4,17 @@
 @media(max-width:900px){.navlinks{position:absolute;top:72px;left:0;right:0;display:none;flex-direction:column;padding:22px;background:var(--bg2);border:1px solid var(--line);border-radius:16px}.navlinks.open{display:flex}.burger{display:flex!important}.hero{grid-template-columns:1fr;padding-top:150px}.hero-art{height:430px}.skill-grid{grid-template-columns:repeat(2,1fr)}.about-grid,.contact{grid-template-columns:1fr}.projects{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr;gap:35px}.stats div:nth-child(2){border:0}}
 @media(max-width:600px){section{padding:75px 0}.hero h1{font-size:61px}.hero-art{height:370px}.orb{width:270px;height:270px}.orb i{transform:rotate(var(--a)) translateX(135px)}.d1{right:-5px}.buttons{flex-direction:column;align-items:stretch}.skill-grid{grid-template-columns:1fr}.pipeline{display:grid;grid-template-columns:1fr}.pipeline>svg{transform:rotate(90deg);margin:auto}.stats{grid-template-columns:1fr 1fr}.stats strong{font-size:34px}.contact{padding:28px}.socials{grid-template-columns:1fr}footer{gap:20px}.scroll{display:none}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+.binary-art{isolation:isolate}
+.brain-canvas{position:absolute;inset:-5%;z-index:0;cursor:crosshair;background:transparent!important;filter:drop-shadow(0 0 18px rgba(0,229,255,.16))}
+.brain-canvas canvas{touch-action:pan-y;background:transparent!important}
+.brain-scan{position:absolute;left:12%;right:12%;height:2px;top:15%;pointer-events:none;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 15px var(--cyan);opacity:.22;animation:brainScan 5s ease-in-out infinite}
+.brain-noise{position:absolute;inset:8%;pointer-events:none;opacity:.05;mix-blend-mode:screen;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(0,229,255,.35) 4px);animation:noiseShift .18s steps(2) infinite}
+.brain-loading{font:10px monospace;letter-spacing:2px;color:var(--cyan);animation:pulse 1.2s ease-in-out infinite}
+.binary-art .data{z-index:2;pointer-events:none}
+@keyframes brainScan{0%,100%{top:16%;opacity:0}15%,85%{opacity:.28}50%{top:82%}}
+@keyframes noiseShift{50%{transform:translateY(2px)}}
+@keyframes pulse{50%{opacity:.3}}
+@media(max-width:600px){.brain-canvas{inset:-12% -18%}.brain-noise{display:none}}
+.console-line{white-space:pre-line;min-width:110px;min-height:40px}
+.console-cursor{display:inline-block;width:6px;height:11px;margin-left:3px;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:consoleBlink .7s steps(1) infinite}
+@keyframes consoleBlink{50%{opacity:0}}
