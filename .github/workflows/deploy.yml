@@ -21,13 +21,38 @@ jobs:
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_PORT: ${{ secrets.VPS_PORT }}
         run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
+          set -euo pipefail
 
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
+          if [ -z "${SSH_PRIVATE_KEY:-}" ]; then
+            echo "VPS_SSH_KEY secret is empty"
+            exit 1
+          fi
 
-          ssh-keyscan -p "$VPS_PORT" -H "$VPS_HOST" >> ~/.ssh/known_hosts
+          if [ -z "${VPS_HOST:-}" ]; then
+            echo "VPS_HOST secret is empty"
+            exit 1
+          fi
+
+          VPS_PORT="${VPS_PORT:-22}"
+
+          mkdir -p "$HOME/.ssh"
+          chmod 700 "$HOME/.ssh"
+
+          printf '%s\n' "$SSH_PRIVATE_KEY" \
+            | tr -d '\r' \
+            > "$HOME/.ssh/deploy_key"
+
+          chmod 600 "$HOME/.ssh/deploy_key"
+
+          ssh-keygen -y -f "$HOME/.ssh/deploy_key" > /dev/null
+
+          ssh-keyscan \
+            -T 15 \
+            -p "$VPS_PORT" \
+            -H "$VPS_HOST" \
+            >> "$HOME/.ssh/known_hosts"
+
+          chmod 600 "$HOME/.ssh/known_hosts"
 
       - name: Deploy application
         env:
