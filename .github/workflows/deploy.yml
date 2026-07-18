@@ -142,15 +142,16 @@ jobs:
           EOF
 
       - name: Health check
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
         run: |
-          sleep 10
           curl \
             --fail \
+            --location \
             --show-error \
             --silent \
             --retry 10 \
             --retry-delay 5 \
             --retry-connrefused \
-            "http://${VPS_HOST}"
+            https://babkin.tech \
+            > /dev/null
+
+          echo "Health check passed"
