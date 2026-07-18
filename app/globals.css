@@ -18,3 +18,5 @@
 .console-line{white-space:pre-line;min-width:110px;min-height:40px}
 .console-cursor{display:inline-block;width:6px;height:11px;margin-left:3px;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:consoleBlink .7s steps(1) infinite}
 @keyframes consoleBlink{50%{opacity:0}}
+html{zoom:1.5}
+@media(max-width:900px){html{zoom:1}}
